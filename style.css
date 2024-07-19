@@ -1,0 +1,115 @@
+:root {
+    --background-col: #f0f0f0;
+    --text-col: #333;
+    --primary-button-col: #007bff;
+    --secondary-button-col: #6c757d;
+    --accent-col: #ff7f50;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-col);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navbar {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 2.5em 2em;
+    box-sizing: border-box;
+}
+
+.navbar h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 3em;
+    color: var(--accent-col);
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-col);
+    font-size: 1.5em;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+#menu {
+    background-color: var(--accent-col);
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+#menu a {
+    color: var(--background-col);
+    font-size: 3em;
+    margin: 0.5em;
+    text-decoration: none;
+}
+
+#menu a:hover {
+    text-decoration: underline;
+}
+
+#menu #close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1em;
+    font-size: 2em;
+    color: var(--background-col);
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    box-sizing: border-box;
+    display: none;
+}
+
+.mobile-navbar #menu-btn {
+    font-size: 2em;
+    color: var(--text-col);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.mobile-navbar h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 3em;
+    color: var(--accent-col);
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar {
+        display: none;
+    }
+
+    .mobile-navbar {
+        display: flex;
+    }
+}
