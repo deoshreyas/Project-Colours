@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colours - A project by Shreyas Deo</title>
+    <title>Colours | A project by Shreyas Deo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -28,9 +28,33 @@
         <div class="left">
             <h1>Colours</h1>
             <h2>A simple project to play around with and generate colour palettes for your designs!</h2>
+            <button id="primary">Primary</button>
+            <button id="secondary">Secondary</button>
         </div>
         <div class="right">
-            
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    <div class="colour-options">
+        <div class="col-input">
+            <input type="color" name="bgCol" id="bgCol" value="var(--background-col)" style="visibility: hidden;">
+            <button onclick="document.getElementById('bgCol').click()">Background</button>
+        </div>
+        <div class="col-input">
+            <input type="color" name="textCol" id="textCol" value="var(--text-col)" style="visibility: hidden;">
+            <button onclick="document.getElementById('textCol').click()">Text</button>
+        </div>
+        <div class="col-input">
+            <input type="color" name="priCol" id="priCol" value="var(--primary-col)" style="visibility: hidden;">
+            <button onclick="document.getElementById('priCol').click()">Primary</button>
+        </div>
+        <div class="col-input">
+            <input type="color" name="secCol" id="secCol" value="var(--secondary-col)" style="visibility: hidden;">
+            <button onclick="document.getElementById('secCol').click()">Secondary</button>
+        </div>
+        <div class="col-input">
+            <input type="color" name="accCol" id="accCol" value="var(--accent-col)" style="visibility: hidden;">
+            <button onclick="document.getElementById('accCol').click()">Accent</button>
         </div>
     </div>
     <script src="script.js"></script>

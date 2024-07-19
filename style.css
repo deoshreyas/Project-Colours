@@ -38,15 +38,15 @@ body {
 }
 
 .navbar a:hover {
-    text-decoration: underline;
+    color: var(--accent-col);
 }
 
 #menu {
     background-color: var(--accent-col);
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
@@ -86,6 +86,7 @@ body {
     padding: 1em 2em;
     box-sizing: border-box;
     display: none;
+    margin-bottom: 12.5em;
 }
 
 .mobile-navbar #menu-btn {
@@ -112,4 +113,120 @@ body {
     .mobile-navbar {
         display: flex;
     }
+}
+
+#canvas {
+    height: 50vh;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 50vh;
+    width: 100vw;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.hero-section > * {
+    margin: 0;
+    padding: 0;
+    width: 40vw;
+}
+
+.hero-section h1 {
+    font-size: 5em;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0;
+}
+
+.hero-section h2 {
+    font-size: 2em;
+    color: var(--text-col);
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-section button {
+    font-size: 1.5em;
+    color: var(--background-col);
+    border: none;
+    outline: none;
+    padding: 0.25em 1em;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.hero-section #primary {
+    background-color: var(--primary-button-col);
+    border: 2px solid var(--primary-button-col);
+}
+
+.hero-section #primary:hover {
+    background-color: transparent;
+    color: var(--primary-button-col);
+}
+
+.hero-section #secondary {
+    background-color: var(--secondary-button-col);
+    border: 2px solid var(--secondary-button-col);
+}
+
+.hero-section #secondary:hover {
+    background-color: transparent;
+    color: var(--secondary-button-col);
+}
+
+@media only screen and (max-width: 600px) {
+    .hero-section {
+        flex-direction: column;
+    }
+
+    .hero-section > * {
+        width: 80vw;
+        text-align: center;
+    }
+}
+
+.colour-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 2em;
+    position: fixed;
+    bottom: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid var(--text-col);
+    padding: 0;
+    border-radius: 100vh;
+}
+
+.col-input button {
+    font-size: 1.25em;
+    font-weight: 100;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0.25em 0.5em;
+    margin-top: -1.5em;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-left: 2px solid var(--text-col);
+    border-right: 2px solid var(--text-col);
+    margin-left: -2.5em;
+}
+
+.col-input:nth-child(1) button {
+    border-left: none;
+}
+
+.col-input:nth-child(5) button {
+    border-right: none;
 }
