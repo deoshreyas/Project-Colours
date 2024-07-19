@@ -105,7 +105,7 @@ body {
     color: var(--accent-col);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 850px) {
     .navbar {
         display: none;
     }
@@ -181,7 +181,7 @@ body {
     color: var(--secondary-button-col);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 850px) {
     .hero-section {
         flex-direction: column;
     }
@@ -192,41 +192,51 @@ body {
     }
 }
 
-.colour-options {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin-top: 2em;
-    position: fixed;
-    bottom: 1em;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 2px solid var(--text-col);
-    padding: 0;
+#colours-change {
+    position: absolute;
+    right: 0.75em;
+    bottom: 0.5em;
+    font-size: 1.75em;
     border-radius: 100vh;
-}
-
-.col-input button {
-    font-size: 1.25em;
-    font-weight: 100;
-    color: var(--text-col);
-    margin: 0;
-    padding: 0.25em 0.5em;
-    margin-top: -1.5em;
-    cursor: pointer;
-    background-color: transparent;
-    outline: none;
+    width: 1.75em;
+    height: 1.75em;
     border: none;
-    border-left: 2px solid var(--text-col);
-    border-right: 2px solid var(--text-col);
-    margin-left: -2.5em;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--accent-col);
+    color: var(--background-col);
 }
 
-.col-input:nth-child(1) button {
-    border-left: none;
+.colour-options {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--text-col);
+    color: var(--background-col);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
 }
 
-.col-input:nth-child(5) button {
-    border-right: none;
+.colour-options h1 {
+    font-size: 3em;
+}
+
+.colour-options h2 {
+    font-weight: 100;
+    display: inline;
+    margin-right: 0.5em;
+}
+
+.colour-options .option {
+    margin-bottom: 0.5em;
+}
+
+.colour-options input {
+    border: 1px solid var(--background-col);
+    background-color: transparent;
 }

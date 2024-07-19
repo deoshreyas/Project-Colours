@@ -19,8 +19,38 @@ function drawHeroRight() {
 
 drawHeroRight();
 
-document.querySelectorAll('.col-input input[type="color"]').forEach(function (input) {
-    input.addEventListener('change', function () {
-        drawHeroRight();
-    });
+var options_open = false;
+function openColourOptions() {
+    if (!options_open) {
+        document.getElementsByClassName('colour-options')[0].style.display = 'flex';
+        options_open = true;
+    } else {
+        document.getElementsByClassName('colour-options')[0].style.display = 'none';
+        options_open = false;
+    }
+}
+
+document.getElementById('background-col').addEventListener('change', function() {
+    document.documentElement.style.setProperty('--background-col', this.value);
+    drawHeroRight();
+});
+
+document.getElementById('text-col').addEventListener('change', function() {
+    document.documentElement.style.setProperty('--text-col', this.value);
+    drawHeroRight();
+});
+
+document.getElementById('primary-button-col').addEventListener('change', function() {
+    document.documentElement.style.setProperty('--primary-button-col', this.value);
+    drawHeroRight();
+});
+
+document.getElementById('secondary-button-col').addEventListener('change', function() {
+    document.documentElement.style.setProperty('--secondary-button-col', this.value);
+    drawHeroRight();
+});
+
+document.getElementById('accent-col').addEventListener('change', function() {
+    document.documentElement.style.setProperty('--accent-col', this.value);
+    drawHeroRight();
 });
