@@ -58,3 +58,44 @@ document.getElementById('accent-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--accent-col', this.value);
     drawHeroRight();
 });
+
+for (var i = 0; i < document.getElementsByClassName('question').length; i++) {
+    acc_ques = document.getElementsByClassName('question')[i];
+    acc_ques.addEventListener('click', function() {
+        this.classList.toggle('active');
+        var acc_ans = this.nextElementSibling;
+        var acc_btn = this.lastElementChild;
+        if (acc_ans.style.maxHeight) {
+            acc_ans.style.maxHeight = null;
+            acc_btn.innerHTML = '<i class="fa-solid fa-plus"></i>';
+        } else {
+            acc_ans.style.maxHeight = acc_ans.scrollHeight + 'px';
+            acc_btn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        }
+    });
+};
+
+const ctx = document.getElementById('chart');
+
+function drawChart() {
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+        }
+    });
+}
+
+drawChart();

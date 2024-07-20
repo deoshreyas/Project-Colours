@@ -319,7 +319,8 @@ body {
     width: 250px;
     padding: 1em;
     box-sizing: border-box;
-    border: 2px solid var(--accent-col);
+    border-radius: 0.25em;
+    background-color: hsl(from var(--background-col) h s calc(l * 0.9));
 } 
 
 @media only screen and (max-width: 300px) {
@@ -337,7 +338,7 @@ body {
 
 .card h1 {
     font-size: 2em;
-    color: var(--primary-button-col);
+    color: var(--accent-col);
     margin: 0;
     padding: 0;
 }
@@ -368,15 +369,30 @@ body {
 }
 
 .acc .answer {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-col);
+}
+
+@media only screen and (max-width: 600px) {
+    .acc .answer {
+        width: 100%;
+    }
 }
 
 .acc .question {
     width: 100%;
-    border: 2px solid var(--accent-col);
     padding: 0.5em;
     box-sizing: border-box;
     position: relative;
+    background-color: var(--accent-col);
+    border-radius: 0.5em;
+    cursor: pointer;
 }
 
 .acc .question .acc-btn {
@@ -384,9 +400,9 @@ body {
     right: 1em;
     top: 50%;
     transform: translateY(-50%);
+    color: var(--text-col);
 }
 
-.acc .question .acc-btn:hover {
-    cursor: pointer;
-    color: var(--accent-col);
+.acc .question:hover > .acc-btn {
+    color: var(--background-col);
 }
