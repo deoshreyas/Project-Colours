@@ -323,7 +323,7 @@ body {
     background-color: hsl(from var(--background-col) h s calc(l * 0.9));
 } 
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 600px) {
     .card {
         width: 90%;
     }
@@ -393,6 +393,7 @@ body {
     background-color: var(--accent-col);
     border-radius: 0.5em;
     cursor: pointer;
+    color: var(--background-col);
 }
 
 .acc .question .acc-btn {
@@ -405,4 +406,63 @@ body {
 
 .acc .question:hover > .acc-btn {
     color: var(--background-col);
+}
+
+.chart-container {
+    color: var(--text-col);
+    text-align: center;
+    margin-top: 3em;
+}
+
+.chart-container > * {
+    margin: 0;
+    padding: 0;
+}
+
+.chart-container h1 {
+    font-size: 5em;
+    color: var(--accent-col);
+}
+
+.chart-container h2 {
+    font-size: 2em;
+    font-weight: 100;
+    margin-bottom: 1em;
+}
+
+.acc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.acc-container > * {
+    width: 40%;
+}
+
+.acc-container h1 {
+    font-size: 5em;
+    color: var(--accent-col);
+    margin: 0;
+    padding: 0;
+}
+
+.acc-container h2 {
+    font-size: 2em;
+    font-weight: 100;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 850px) {
+    .acc-container {
+        flex-direction: column;
+    }
+
+    .acc-container > * {
+        width: 90%;
+    }
 }

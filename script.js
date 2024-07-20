@@ -37,26 +37,31 @@ function openColourOptions() {
 document.getElementById('background-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--background-col', this.value);
     drawHeroRight();
+    drawChart();
 });
 
 document.getElementById('text-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--text-col', this.value);
     drawHeroRight();
+    drawChart();
 });
 
 document.getElementById('primary-button-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--primary-button-col', this.value);
     drawHeroRight();
+    drawChart();
 });
 
 document.getElementById('secondary-button-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--secondary-button-col', this.value);
     drawHeroRight();
+    drawChart();
 });
 
 document.getElementById('accent-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--accent-col', this.value);
     drawHeroRight();
+    drawChart();
 });
 
 for (var i = 0; i < document.getElementsByClassName('question').length; i++) {
@@ -75,27 +80,56 @@ for (var i = 0; i < document.getElementsByClassName('question').length; i++) {
     });
 };
 
+var labels = [];
+for (var i=0; i<26; i++) {
+    labels = [...labels, i];
+}
+
+var data = [];
+for (var i=0; i<26; i++) {
+    data = [...data, Math.floor(Math.random() * 100)];
+}
+
 const ctx = document.getElementById('chart');
+Chart.defaults.color = window.getComputedStyle(document.documentElement).getPropertyValue('--text-col');
+Chart.defaults.borderColor = 'transparent';
+var chart = new Chart(ctx, {
+    data: {
+        datasets: [{
+            type: 'line',
+            label: 'Line Dataset',
+            data: data,
+            borderColor: window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'),
+            backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'),
+        }, {
+            type: 'bar',
+            label: 'Bar Dataset',
+            data: data,
+            backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--primary-button-col'),
+        }],
+        labels: labels
+    }
+});
 
 function drawChart() {
-    new Chart(ctx, {
-        type: 'bar',
+    chart.destroy();
+    const ctx = document.getElementById('chart');
+    Chart.defaults.color = window.getComputedStyle(document.documentElement).getPropertyValue('--text-col');
+    chart = new Chart(ctx, {
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true
-            }
-            }
+                type: 'line',
+                label: 'Line Dataset',
+                data: data,
+                borderColor: window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'),
+                backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'),
+            }, {
+                type: 'bar',
+                label: 'Bar Dataset',
+                data: data,
+                backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--primary-button-col'),
+            }],
+            labels: labels
         }
     });
 }
-
-drawChart();
