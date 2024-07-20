@@ -211,7 +211,7 @@ body {
 }
 
 .colour-options {
-    position: absolute;
+    position: fixed;
     bottom: 1em;
     left: 50%;
     transform: translateX(-50%);
@@ -223,12 +223,14 @@ body {
     border: 1px solid var(--text-col);
     padding-top: .5em;
     padding-bottom: .25em;
-    z-index: 1s;
+    z-index: 1;
+    background-color: var(--background-col);
+    color: var(--text-col);
 }
 
 @media only screen and (max-width: 850px) {
     .colour-options {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         display: none;
@@ -254,9 +256,13 @@ body {
     }
 }
 
+.colour-options h2:hover {
+    color: var(--accent-col);
+}
+
 @media only screen and (min-width: 851px) {
     .colour-options {
-        position: absolute;
+        position: fixed;
         bottom: 1em;
         left: 50%;
         transform: translateX(-50%);
@@ -268,6 +274,8 @@ body {
         border: 1px solid var(--text-col);
         padding-top: .5em;
         padding-bottom: .25em;
+        background-color: var(--background-col);
+        color: var(--text-col);
     }
 
     #colours-change {
@@ -295,4 +303,90 @@ body {
     background-color: transparent;
     visibility: hidden;
     position: absolute;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 2em;
+    margin: 2em 1em;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 250px;
+    padding: 1em;
+    box-sizing: border-box;
+    border: 2px solid var(--accent-col);
+} 
+
+@media only screen and (max-width: 300px) {
+    .card {
+        width: 90%;
+    }
+
+}
+
+.card .bg {
+    width: 100%;
+    height: 200px;
+    background-color: var(--accent-col);
+}
+
+.card h1 {
+    font-size: 2em;
+    color: var(--primary-button-col);
+    margin: 0;
+    padding: 0;
+}
+
+.card h2 {
+    font-weight: 100;
+    font-size: 1.25em;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0;
+}
+
+.card .content {
+    margin-top: 1em;
+}
+
+.accordion {
+    margin: 1em 0.5em;
+    font-size: 1.5em;
+}
+
+.accordion > * {
+    margin-bottom: 1em;
+}
+
+.accordion:last-child {
+    margin-bottom: 0;
+}
+
+.acc .answer {
+    display: none;
+}
+
+.acc .question {
+    width: 100%;
+    border: 2px solid var(--accent-col);
+    padding: 0.5em;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.acc .question .acc-btn {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.acc .question .acc-btn:hover {
+    cursor: pointer;
+    color: var(--accent-col);
 }
