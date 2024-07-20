@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Palettes | Colours | A project by Shreyas Deo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .main-col {
+            position: fixed;
+            bottom: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.25em 0.5em;
+            border: 1px solid #000;
+            border-radius: 0.5em;
+            cursor: pointer;
+        }
+
+        .main-col h1 {
+            font-size: 1.25em;
+            font-weight: 100;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        #main-colour {
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            visibility: hidden;
+        }
+
+        .schemes {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-direction: column;
+            gap: 2em;
+            align-items: flex-start;
+            padding: 1em 2em;
+            box-sizing: border-box;
+        }
+
+        .scheme-colours {
+            display: flex;
+            flex-direction: row;
+            gap: 2em;
+            flex-wrap: wrap;
+        }
+
+        .colour {
+            width: 5em;
+            height: 5em;
+            border-radius: 0.25em;
+            cursor: pointer;
+            outline: 1px solid rgb(224, 224, 224);
+            outline-offset: 0.5em;
+        }
+
+        .scheme h1 {
+            font-weight: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="schemes">
+        <div class="scheme" id="Monochromatic">
+            <h1>Monochromatic</h1>
+            <div class="scheme-colours">
+                <div class="colour monochrome-colour"></div>
+                <div class="colour monochrome-colour"></div>
+                <div class="colour monochrome-colour"></div>
+                <div class="colour monochrome-colour"></div>
+                <div class="colour monochrome-colour"></div>
+            </div>
+        </div>
+    </div>
+    <div class="main-col">
+        <h1>Main Colour</h1>
+        <input type="color" name="main-colour" id="main-colour" value="#000">
+    </div>
+    <script src="scheme.js"></script>
+    <script>
+        const mainCol = document.getElementById('main-colour');
+        var starting_col = mainCol.value;
+        console.log(starting_col);
+        mainCol.addEventListener('change', () => {
+            document.getElementsByClassName('main-col')[0].style.backgroundColor = mainCol.value;
+            starting_col = mainCol.value;
+            redrawPalettes();
+        });
+        document.getElementsByClassName('main-col')[0].addEventListener('click', () => {
+            mainCol.click();
+        });
+
+        function redrawPalettes() {
+            drawMonochrome();
+        }
+
+        function drawMonochrome() {
+            var start_colour = hexToHSL(starting_col);
+            var colours = Monochromatic(start_colour, 5);
+            for (var i=0; i<5; i++) {
+                document.getElementsByClassName('monochrome-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+            }
+        }
+
+        redrawPalettes();
+    </script>
+</body>
+</html>
