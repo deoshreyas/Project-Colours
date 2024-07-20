@@ -1,15 +1,42 @@
-const query = window.location.search;
-const urlParams = new URLSearchParams(query);
-if (urlParams.has('bg')) {
-    document.documentElement.style.setProperty('--background-col', urlParams.get('bg'));
-} else {
-    window.location.href = window.location.href + '?bg=%23' + window.getComputedStyle(document.documentElement).getPropertyValue('--background-col').slice(1);
-}
+document.getElementById('background-col').value = window.getComputedStyle(document.documentElement).getPropertyValue('--background-col');
+document.getElementById('text-col').value = window.getComputedStyle(document.documentElement).getPropertyValue('--text-col');
+document.getElementById('primary-button-col').value = window.getComputedStyle(document.documentElement).getPropertyValue('--primary-button-col');
+document.getElementById('secondary-button-col').value = window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col');
+document.getElementById('accent-col').value = window.getComputedStyle(document.documentElement).getPropertyValue('--accent-col');
 
-function setNewSearchParams() {
+function setBgParam() {
     const query = window.location.search;
     const urlParams = new URLSearchParams(query);
-    urlParams.set('bg', window.getComputedStyle(document.documentElement).getPropertyValue('--background-col').slice(1));
+    urlParams.set('bg', window.getComputedStyle(document.documentElement).getPropertyValue('--background-col'));
+    window.location.search = urlParams.toString();
+}
+
+function setTextParam() {
+    const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    urlParams.set('text', window.getComputedStyle(document.documentElement).getPropertyValue('--text-col'));
+    window.location.search = urlParams.toString();
+}
+
+function setPrimParam() {
+    const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    urlParams.set('prim', window.getComputedStyle(document.documentElement).getPropertyValue('--primary-button-col'));
+    window.location.search = urlParams.toString();
+}
+
+function setSecParam() {
+    const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    urlParams.set('sec', window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'));
+    window.location.search = urlParams.toString();
+}
+
+function setAccParam() {
+    const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    urlParams.set('acc', window.getComputedStyle(document.documentElement).getPropertyValue('--accent-col'));
+    window.location.search = urlParams.toString();
 }
 
 function closeMenu() {
@@ -50,31 +77,27 @@ function openColourOptions() {
 
 document.getElementById('background-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--background-col', this.value);
-    setNewSearchParams();
+    setBgParam();
 });
 
 document.getElementById('text-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--text-col', this.value);
-    drawHeroRight();
-    drawChart();
+    setTextParam();
 });
 
 document.getElementById('primary-button-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--primary-button-col', this.value);
-    drawHeroRight();
-    drawChart();
+    setPrimParam();
 });
 
 document.getElementById('secondary-button-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--secondary-button-col', this.value);
-    drawHeroRight();
-    drawChart();
+    setSecParam();
 });
 
 document.getElementById('accent-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--accent-col', this.value);
-    drawHeroRight();
-    drawChart();
+    setAccParam();
 });
 
 for (var i = 0; i < document.getElementsByClassName('question').length; i++) {
