@@ -1,3 +1,17 @@
+const query = window.location.search;
+const urlParams = new URLSearchParams(query);
+if (urlParams.has('bg')) {
+    document.documentElement.style.setProperty('--background-col', urlParams.get('bg'));
+} else {
+    window.location.href = window.location.href + '?bg=%23' + window.getComputedStyle(document.documentElement).getPropertyValue('--background-col').slice(1);
+}
+
+function setNewSearchParams() {
+    const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    urlParams.set('bg', window.getComputedStyle(document.documentElement).getPropertyValue('--background-col').slice(1));
+}
+
 function closeMenu() {
     document.getElementById('menu').style.display = 'none';
     document.querySelector('body').style.overflow = 'scroll';
@@ -36,8 +50,7 @@ function openColourOptions() {
 
 document.getElementById('background-col').addEventListener('change', function() {
     document.documentElement.style.setProperty('--background-col', this.value);
-    drawHeroRight();
-    drawChart();
+    setNewSearchParams();
 });
 
 document.getElementById('text-col').addEventListener('change', function() {
