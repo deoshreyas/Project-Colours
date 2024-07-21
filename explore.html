@@ -62,6 +62,22 @@
             cursor: pointer;
             outline: 1px solid rgb(224, 224, 224);
             outline-offset: 0.5em;
+            text-align: center;
+            position: relative;
+        }
+
+        .colour h3 {
+            opacity: 0;
+            transition: opacity 0.25s;
+            background-color: white;
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translateX(-50%);
+        }
+
+        .colour:hover > h3 {
+            opacity: 1;
         }
 
         .scheme h1 {
@@ -71,7 +87,7 @@
 </head>
 <body>
     <div class="schemes">
-        <div class="scheme" id="Monochromatic">
+        <div class="scheme">
             <h1>Monochromatic</h1>
             <div class="scheme-colours">
                 <div class="colour monochrome-colour"></div>
@@ -79,6 +95,27 @@
                 <div class="colour monochrome-colour"></div>
                 <div class="colour monochrome-colour"></div>
                 <div class="colour monochrome-colour"></div>
+            </div>
+        </div>
+        <div class="scheme">
+            <h1>Analogous</h1>
+            <div class="scheme-colours">
+                <div class="colour analogous-colour"></div>
+                <div class="colour analogous-colour"></div>
+                <div class="colour analogous-colour"></div>
+                <div class="colour analogous-colour"></div>
+                <div class="colour analogous-colour"></div>
+            </div>
+        </div>
+        
+        <div class="scheme">
+            <h1>Complementary</h1>
+            <div class="scheme-colours">
+                <div class="colour complementary-colour"></div>
+                <div class="colour complementary-colour"></div>
+                <div class="colour complementary-colour"></div>
+                <div class="colour complementary-colour"></div>
+                <div class="colour complementary-colour"></div>
             </div>
         </div>
     </div>
@@ -90,7 +127,6 @@
     <script>
         const mainCol = document.getElementById('main-colour');
         var starting_col = mainCol.value;
-        console.log(starting_col);
         mainCol.addEventListener('change', () => {
             document.getElementsByClassName('main-col')[0].style.backgroundColor = mainCol.value;
             starting_col = mainCol.value;
@@ -102,6 +138,8 @@
 
         function redrawPalettes() {
             drawMonochrome();
+            drawAnalogous();
+            drawComplementary();
         }
 
         function drawMonochrome() {
@@ -109,10 +147,35 @@
             var colours = Monochromatic(start_colour, 5);
             for (var i=0; i<5; i++) {
                 document.getElementsByClassName('monochrome-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+                document.getElementsByClassName('monochrome-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
+            }
+        }
+
+        function drawAnalogous() {
+            var start_colour = hexToHSL(starting_col);
+            var colours = Analogous(start_colour, 5);
+            for (var i=0; i<5; i++) {
+                document.getElementsByClassName('analogous-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+                document.getElementsByClassName('analogous-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
+            }
+        }
+
+        function drawComplementary() {
+            var start_colour = hexToHSL(starting_col);
+            var colours = Complementary(start_colour, 5);
+            for (var i=0; i<5; i++) {
+                document.getElementsByClassName('complementary-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+                document.getElementsByClassName('complementary-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
             }
         }
 
         redrawPalettes();
+
+        Array.from(document.getElementsByClassName('colour')).forEach(colour => {
+            colour.addEventListener('click', () => {
+                navigator.clipboard.writeText(colour.value);
+            });
+        });
     </script>
 </body>
 </html>

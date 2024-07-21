@@ -30,8 +30,38 @@ function hexToHSL(hexColor) {
     hue = Math.round(hue * 360);
     saturation = Math.round(saturation * 100);
     lightness = Math.round(lightness * 100);
-    console.log(hue, saturation, lightness);
     return new Colour(hue, saturation, lightness);
+}
+
+function HSLToHex(col) {
+    let h = col.h;
+    let s = col.s;
+    let l = col.l;
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    let r, g, b;
+    if (s == 0) {
+        r = g = b = l;
+    } else {
+        let hue2rgb = function hue2rgb(p, q, t) {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1/6) return p + (q - p) * 6 * t;
+            if (t < 1/2) return q;
+            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+        let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        let p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+    r = Math.round(r * 255);
+    g = Math.round(g * 255);
+    b = Math.round(b * 255);
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
 
@@ -56,4 +86,50 @@ function Monochromatic(starting_colour, num_colours) {
         colours.push(new Colour(h, s, l));
     }
     return sort_colours(colours);
+}
+
+function Analogous(starting_colour, num_colours) {
+    var h = starting_colour.h;
+    var s = starting_colour.s;
+    var l = starting_colour.l;
+    var colours = [];
+    var hue_shift = 30;
+    for (var i = 0; i < num_colours; i++) {
+        if (i==0) {
+            colours.push(new Colour(h, s, l));
+            continue;
+        }
+        h += i <= num_colours / 2 ? hue_shift : -hue_shift;
+        hue_shift *= 2;
+        if (h > 360) {
+            h -= 360;
+        } else if (h < 0) {
+            h += 360;
+        }
+        colours.push(new Colour(h, s, l));
+    }
+    return colours;
+}
+
+function Complementary(starting_colour, num_colours) {
+    var h = starting_colour.h;
+    var s = starting_colour.s;
+    var l = starting_colour.l;
+    var colours = Analogous(starting_colour, num_colours);
+    var new_colours = [];
+    var hue_shift = 180;
+    for (var i = 0; i < num_colours; i++) {
+        if (i==0) {
+            new_colours.push(new Colour(h, s, l));
+            continue;
+        }
+        h = colours[i].h + hue_shift;
+        if (h > 360) {
+            h -= 360;
+        } else if (h < 0) {
+            h += 360;
+        }
+        new_colours.push(new Colour(h, s, l));
+    }
+    return new_colours;
 }
