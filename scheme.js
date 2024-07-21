@@ -115,21 +115,60 @@ function Complementary(starting_colour, num_colours) {
     var h = starting_colour.h;
     var s = starting_colour.s;
     var l = starting_colour.l;
-    var colours = Analogous(starting_colour, num_colours);
-    var new_colours = [];
+    var colours = [];
     var hue_shift = 180;
     for (var i = 0; i < num_colours; i++) {
         if (i==0) {
-            new_colours.push(new Colour(h, s, l));
+            colours.push(new Colour(h, s, l));
             continue;
         }
-        h = colours[i].h + hue_shift;
-        if (h > 360) {
-            h -= 360;
-        } else if (h < 0) {
-            h += 360;
-        }
-        new_colours.push(new Colour(h, s, l));
+        h = (h + hue_shift) % 360;
+        colours.push(new Colour(h, s, l));
+        h += i % 2 ? 30 : 0;
     }
-    return new_colours;
+    return colours;
+}
+
+function Triadic(starting_colour, num_colours) {
+    var h = starting_colour.h;
+    var s = starting_colour.s;
+    var l = starting_colour.l;
+    var colours = [];
+    var hue_shift = 120;
+    for (var i = 1; i <= num_colours; i++) {
+        if (i==1) {
+            colours.push(new Colour(h, s, l));
+            continue;
+        }
+        h = (h + hue_shift) % 360;
+        colours.push(new Colour(h, s, l));
+        h += i%3==0 ? 30 : 0;
+        console.log(h)
+    }
+    return colours;
+}
+
+function SplitComplementary(starting_colour, num_colours) {
+    var h = starting_colour.h;
+    var s = starting_colour.s;
+    var l = starting_colour.l;
+    var colours = [];
+    var hue_shift = 180;
+    var num_col_split = 0;
+    for (var i = 0; i < num_colours; i++) {
+        if (i==0) {
+            colours.push(new Colour(h, s, l));
+            continue;
+        }
+        if (num_col_split < 3) {
+            h = (h + hue_shift) % 360;
+            colours.push(new Colour(h, s, l));
+            num_col_split++;
+            continue;
+        }
+        h += 30;
+        colours.push(new Colour(h, s, l));
+        num_col_split = 0;
+    }
+    return colours;
 }

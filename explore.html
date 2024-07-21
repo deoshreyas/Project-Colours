@@ -107,7 +107,6 @@
                 <div class="colour analogous-colour"></div>
             </div>
         </div>
-        
         <div class="scheme">
             <h1>Complementary</h1>
             <div class="scheme-colours">
@@ -116,6 +115,26 @@
                 <div class="colour complementary-colour"></div>
                 <div class="colour complementary-colour"></div>
                 <div class="colour complementary-colour"></div>
+            </div>
+        </div>
+        <div class="scheme">
+            <h1>Triadic</h1>
+            <div class="scheme-colours">
+                <div class="colour triadic-colour"></div>
+                <div class="colour triadic-colour"></div>
+                <div class="colour triadic-colour"></div>
+                <div class="colour triadic-colour"></div>
+                <div class="colour triadic-colour"></div>
+            </div>
+        </div>
+        <div class="scheme">
+            <h1>Split Complementary</h1>
+            <div class="scheme-colours">
+                <div class="colour split-com-colour"></div>
+                <div class="colour split-com-colour"></div>
+                <div class="colour split-com-colour"></div>
+                <div class="colour split-com-colour"></div>
+                <div class="colour split-com-colour"></div>
             </div>
         </div>
     </div>
@@ -128,7 +147,6 @@
         const mainCol = document.getElementById('main-colour');
         var starting_col = mainCol.value;
         mainCol.addEventListener('change', () => {
-            document.getElementsByClassName('main-col')[0].style.backgroundColor = mainCol.value;
             starting_col = mainCol.value;
             redrawPalettes();
         });
@@ -140,6 +158,8 @@
             drawMonochrome();
             drawAnalogous();
             drawComplementary();
+            drawTriadic();
+            drawSplitComplementary();
         }
 
         function drawMonochrome() {
@@ -169,11 +189,30 @@
             }
         }
 
+        function drawTriadic() {
+            var start_colour = hexToHSL(starting_col);
+            var colours = Triadic(start_colour, 5);
+            for (var i=0; i<5; i++) {
+                document.getElementsByClassName('triadic-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+                document.getElementsByClassName('triadic-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
+            }
+        }
+
+        function drawSplitComplementary() {
+            var start_colour = hexToHSL(starting_col);
+            var colours = SplitComplementary(start_colour, 5);
+            for (var i=0; i<5; i++) {
+                document.getElementsByClassName('split-com-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+                document.getElementsByClassName('split-com-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
+            }
+        }
+
         redrawPalettes();
 
         Array.from(document.getElementsByClassName('colour')).forEach(colour => {
             colour.addEventListener('click', () => {
-                navigator.clipboard.writeText(colour.value);
+                var hex = colour.querySelector('h3').innerText;
+                navigator.clipboard.writeText(hex);
             });
         });
     </script>
