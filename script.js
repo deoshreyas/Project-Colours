@@ -169,3 +169,24 @@ function drawChart() {
         }
     });
 }
+
+Array.from(document.getElementsByClassName('generator-btn')).forEach(item => item.addEventListener('click', function() {
+    var colours = get_random_scheme();
+    var bg = HSLToHex(colours[0]);
+    var text = HSLToHex(colours[1]);
+    var prim = HSLToHex(colours[2]);
+    var sec = HSLToHex(colours[3]);
+    var acc = HSLToHex(colours[4]);
+    changeURLParams(bg, text, prim, sec, acc);
+}));
+
+function changeURLParams(bg, text, prim, sec, acc) {
+    const query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    urlParams.set('bg', bg);
+    urlParams.set('text', text);
+    urlParams.set('prim', prim);
+    urlParams.set('sec', sec);
+    urlParams.set('acc', acc);
+    window.location.search = urlParams.toString();
+}

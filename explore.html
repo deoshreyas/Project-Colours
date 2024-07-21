@@ -20,6 +20,7 @@
             border: 1px solid #000;
             border-radius: 0.5em;
             cursor: pointer;
+            background-color: white;
         }
 
         .main-col h1 {
@@ -43,7 +44,7 @@
             width: 100%;
             flex-direction: column;
             gap: 2em;
-            align-items: flex-start;
+            align-items: center;
             padding: 1em 2em;
             box-sizing: border-box;
         }
@@ -137,6 +138,16 @@
                 <div class="colour split-com-colour"></div>
             </div>
         </div>
+        <div class="scheme">
+            <h1>Square</h1>
+            <div class="scheme-colours">
+                <div class="colour square-colour"></div>
+                <div class="colour square-colour"></div>
+                <div class="colour square-colour"></div>
+                <div class="colour square-colour"></div>
+                <div class="colour square-colour"></div>
+            </div>
+        </div>
     </div>
     <div class="main-col">
         <h1>Main Colour</h1>
@@ -160,6 +171,7 @@
             drawComplementary();
             drawTriadic();
             drawSplitComplementary();
+            drawSquare();
         }
 
         function drawMonochrome() {
@@ -204,6 +216,15 @@
             for (var i=0; i<5; i++) {
                 document.getElementsByClassName('split-com-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
                 document.getElementsByClassName('split-com-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
+            }
+        }
+
+        function drawSquare() {
+            var start_colour = hexToHSL(starting_col);
+            var colours = Square(start_colour, 5);
+            for (var i=0; i<5; i++) {
+                document.getElementsByClassName('square-colour')[i].style.backgroundColor = 'hsl(' + colours[i].h + ', ' + colours[i].s + '%, ' + colours[i].l + '%)';
+                document.getElementsByClassName('square-colour')[i].innerHTML = '<h3>' + HSLToHex(colours[i]) + '</h3';
             }
         }
 

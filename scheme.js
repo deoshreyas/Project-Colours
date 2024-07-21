@@ -143,7 +143,6 @@ function Triadic(starting_colour, num_colours) {
         h = (h + hue_shift) % 360;
         colours.push(new Colour(h, s, l));
         h += i%3==0 ? 30 : 0;
-        console.log(h)
     }
     return colours;
 }
@@ -153,22 +152,70 @@ function SplitComplementary(starting_colour, num_colours) {
     var s = starting_colour.s;
     var l = starting_colour.l;
     var colours = [];
-    var hue_shift = 180;
-    var num_col_split = 0;
+    var hue_shift = 150;
+    for (var i = 0; i < num_colours / 2; i++) {
+        if (i==0) {
+            colours.push(new Colour(h, s, l));
+            continue;
+        }
+        colours.push(new Colour((h + hue_shift) % 360, s, l));
+        hue_shift += 60;
+        colours.push(new Colour((h + hue_shift) % 360, s, l));
+        hue_shift -= 60;
+        h += 30;
+    }
+    return colours;
+}
+
+function Square(starting_colour, num_colours) {
+    var h = starting_colour.h;
+    var s = starting_colour.s;
+    var l = starting_colour.l;
+    var colours = [];
+    var hue_shift = 90;
     for (var i = 0; i < num_colours; i++) {
         if (i==0) {
             colours.push(new Colour(h, s, l));
             continue;
         }
-        if (num_col_split < 3) {
-            h = (h + hue_shift) % 360;
-            colours.push(new Colour(h, s, l));
-            num_col_split++;
-            continue;
+        colours.push(new Colour((h + hue_shift) % 360, s, l));
+        hue_shift += 90;
+        if (hue_shift > 360) {
+            hue_shift -= 360;
         }
-        h += 30;
-        colours.push(new Colour(h, s, l));
-        num_col_split = 0;
+        console.log(h, hue_shift);
+        h += i%3==0 ? 30 : 0;
+    }
+    return colours;
+}
+
+function get_random_scheme() {
+    var h = Math.floor(Math.random() * 360);
+    var s = 40 + Math.floor(Math.random() * 60);
+    var l = 30 + Math.floor(Math.random() * 40);
+    var starting_colour = new Colour(h, s, l);
+    var num_colours = 5;
+    var scheme = Math.floor(Math.random() * 6);
+    var colours = [];
+    switch (scheme) {
+        case 0:
+            colours = Monochromatic(starting_colour, num_colours);
+            break;
+        case 1:
+            colours = Analogous(starting_colour, num_colours);
+            break;
+        case 2:
+            colours = Complementary(starting_colour, num_colours);
+            break;
+        case 3:
+            colours = Triadic(starting_colour, num_colours);
+            break;
+        case 4:
+            colours = SplitComplementary(starting_colour, num_colours);
+            break;
+        case 5:
+            colours = Square(starting_colour, num_colours);
+            break;
     }
     return colours;
 }
