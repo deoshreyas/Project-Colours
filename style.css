@@ -116,8 +116,9 @@ body {
     }
 }
 
-#canvas {
-    width: 100%;
+#chart {
+    width: 100% !important;
+    max-width: 800px !important;
 }
 
 .hero-section {
@@ -464,5 +465,217 @@ body {
 
     .acc-container > * {
         width: 90%;
+    }
+}
+
+.steps-container {
+    margin: 15em 2em 0 2em;
+    background-color: hsl(from var(--background-col) h s calc(l * 0.9));
+    border-radius: 1em;
+    padding: 2em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.steps-container .t {
+    width: 30%;
+}
+
+.steps-container .steps {
+    width: 50%;
+}
+
+.steps-container h1 {
+    font-size: 5em;
+    color: var(--accent-col);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0.5em;
+}
+
+.steps-container h2 {
+    font-size: 5em;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0;
+}
+
+.steps-container h3 {
+    font-size: 1.5em;
+    font-weight: 100;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 850px) {
+    .steps-container {
+        flex-direction: column;
+    }
+
+    .steps-container .t {
+        width: 100%;
+    }
+
+    .steps-container h1 {
+        font-size: 3em;
+    }
+
+    .steps-container .steps {
+        width: 100%;
+    }
+}
+
+.contact-form {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2em 0;
+    width: 100%;
+    text-align: center;
+}
+
+.contact-form h1 {
+    font-size: 5em;
+    color: var(--accent-col);
+    margin: 0;
+    padding: 0;
+}
+
+.contact-form h2 {
+    font-size: 2em;
+    font-weight: 100;
+    color: var(--text-col);
+    margin: 0;
+    padding: 0;
+}
+
+.contact-form form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.contact-form input {
+    width: 90vw;
+    padding: 0.5em;
+    border: 1px solid var(--text-col);
+    border-radius: 0.5em;
+    outline: none;
+    font-size: 1.5em;
+    font-weight: 100;
+}
+
+.contact-form textarea {
+    width: 90vw;
+    padding: 0.5em;
+    border: 1px solid var(--text-col);
+    border-radius: 0.5em;
+    outline: none;
+    font-size: 1.9em;
+    font-weight: 100;
+    resize: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 200px;
+}
+
+@media only screen and (max-width: 850px) {
+    .contact-form {
+        width: 80%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .contact-form h1 {
+        font-size: 3em;
+    }
+
+    .contact-form h2 {
+        font-size: 1.5em;
+    }
+
+    .contact-form input {
+        width: 60vw;
+    }
+
+    .contact-form textarea {
+        width: 60vw;
+    }
+}
+
+.contact-form button {
+    padding: 0.25em 1em;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--primary-button-col);
+    color: var(--background-col);
+    border-radius: 100vh;
+    font-size: 1.5em;
+    border: 2px solid var(--primary-button-col);
+}
+
+.contact-form button:hover {
+    background-color: transparent;
+    color: var(--primary-button-col);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--accent-col);
+    color: var(--background-col);
+    padding: 2em 0 6em 0;
+}
+
+.footer h1 {
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+}
+
+.footer h2 {
+    font-size: 1.5em;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 850px) {
+    .footer {
+        flex-direction: column;
+    }
+}
+
+.footer .socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.footer .socials a {
+    font-size: 2em;
+    color: var(--background-col);
+}
+
+.footer .socials a:hover {
+    color: var(--text-col);
+}
+
+@media only screen and (max-width: 850px) {
+    .footer {
+        padding-bottom: 2em;
     }
 }

@@ -144,31 +144,12 @@ var chart = new Chart(ctx, {
             backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--primary-button-col'),
         }],
         labels: labels
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
     }
 });
-
-function drawChart() {
-    chart.destroy();
-    const ctx = document.getElementById('chart');
-    Chart.defaults.color = window.getComputedStyle(document.documentElement).getPropertyValue('--text-col');
-    chart = new Chart(ctx, {
-        data: {
-            datasets: [{
-                type: 'line',
-                label: 'Line Dataset',
-                data: data,
-                borderColor: window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'),
-                backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--secondary-button-col'),
-            }, {
-                type: 'bar',
-                label: 'Bar Dataset',
-                data: data,
-                backgroundColor: window.getComputedStyle(document.documentElement).getPropertyValue('--primary-button-col'),
-            }],
-            labels: labels
-        }
-    });
-}
 
 Array.from(document.getElementsByClassName('generator-btn')).forEach(item => item.addEventListener('click', function() {
     var colours = get_random_scheme();
@@ -190,3 +171,9 @@ function changeURLParams(bg, text, prim, sec, acc) {
     urlParams.set('acc', acc);
     window.location.search = urlParams.toString();
 }
+
+const form = document.querySelector('.contact-form');
+const formElements = form.querySelectorAll('input, textarea, button');
+formElements.forEach(element => {
+    element.disabled = true;
+});
